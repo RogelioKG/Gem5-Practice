@@ -96,7 +96,7 @@ def config_cache(options, system):
         system.tol2bus = L2XBar(clk_domain = system.cpu_clk_domain)
         system.tol3bus = L3XBar(clk_domain = system.cpu_clk_domain)
         system.l2.cpu_side = system.tol2bus.master
-        system.l2.mem_side = system.tol3bus.slave # RogelioKG: l2.mem_size attach to tol3bus.slave
+        system.l2.mem_side = system.tol3bus.slave # RogelioKG: l2.mem_side attach to tol3bus.slave
         system.l3.cpu_side = system.tol3bus.master
         system.l3.mem_side = system.membus.slave
 

@@ -314,7 +314,7 @@ class BaseCPU(MemObject):
         self.toL2Bus.master = self.l2cache.cpu_side
         self._cached_ports = ['l2cache.mem_side']
 
-    # RogelioKG: simpilat to addTwoLevelCacheHierarchy
+    # RogelioKG: similar to addTwoLevelCacheHierarchy
     def addThreeLevelCacheHierarchy(self, ic, dc, l3c, iwc=None, dwc=None,
                                   xbar=None):
         self.addPrivateSplitL1Caches(ic, dc, iwc, dwc)
