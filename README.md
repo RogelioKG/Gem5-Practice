@@ -75,11 +75,11 @@
 ## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Q2. Enable L3 cache
 
 + 修改檔案
-  + [ ] `gem5/configs/common/Options.py`
-  + [ ] `gem5/configs/common/Caches.py`
-  + [ ] `gem5/configs/common/CacheConfig.py`
-  + [ ] `gem5/src/mem/Xbar.py`
-  + [ ] `gem5/src/cpu/BaseCPU.py`
+  + [x] `gem5/configs/common/Options.py`
+  + [x] `gem5/configs/common/Caches.py`
+  + [x] `gem5/configs/common/CacheConfig.py`
+  + [x] `gem5/src/mem/Xbar.py`
+  + [x] `gem5/src/cpu/BaseCPU.py`
 
 + 注意
   > [!NOTE]
