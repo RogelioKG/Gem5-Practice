@@ -77,16 +77,16 @@
 + 修改檔案
   + [ ] `gem5/configs/common/Options.py`
   + [ ] `gem5/configs/common/Caches.py`
-  + [ ] `gem5/configs/common/Options.py`
-  + [ ] `gem5/src/cpu/BaseCPU.py`
   + [ ] `gem5/configs/common/CacheConfig.py`
+  + [ ] `gem5/src/mem/Xbar.py`
+  + [ ] `gem5/src/cpu/BaseCPU.py`
 
 + 注意
   > [!NOTE]
-  > 前面四個檔案只是增加 L3 cache 的 parameter ，照著 L2 cache 的設定去做模仿就可以。
+  > 前面四個檔案只是增加 L3 cache 的 parameter，照著 L2 cache 的設定去做模仿就可以。
 
   > [!NOTE]
-  > `CacheConfig.py` 需要讓 L3 cache 連接整個 Gem5 系統，這邊要注意  L2 跟 L3 這兩個 cache 的關係，要讓系統在已使用 L2 cache 的情況下才能使用 L3 cache，所以要注意修改的時候有沒有滿足這個條件。
+  > `CacheConfig.py` 需要讓 L3 cache 連接整個 Gem5 系統，這邊要注意 L2 跟 L3 這兩個 cache 的關係，要讓系統在已使用 L2 cache 的情況下才能使用 L3 cache，所以要注意修改的時候有沒有滿足這個條件。
 
   > [!NOTE]
   > 細節 code 的部分，同學可以上網找資源關鍵字 Gem5 L3 cache 之類的。
