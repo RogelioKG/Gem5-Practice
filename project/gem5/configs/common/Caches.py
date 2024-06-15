@@ -81,6 +81,10 @@ class L3Cache(Cache): # RogelioKG: add L3Cache class
     tgts_per_mshr = 12
     write_buffers = 8
 
+    # RogelioKG: well... at first, I thought I could use an option to specify this argument.
+    # But then I found out that it cannot be modified after L3Cache class was created.
+    replacement_policy = Param.BaseReplacementPolicy(LFURP(), "Replacement policy")
+
 class IOCache(Cache):
     assoc = 8
     tag_latency = 50

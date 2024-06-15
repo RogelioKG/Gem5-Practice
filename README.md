@@ -7,6 +7,7 @@
 + [**Setting up the Project**](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-setting-up-the-project)
 + [**Q2. Enable L3 cache**](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-q2-enable-l3-cache)
 + [**Grading Criteria**](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-grading-criteria)
++ [**Diagram**](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-diagram)
 
 
 ## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Setting up the Project
@@ -102,9 +103,11 @@
     > 必須跑 benchmark quicksort 在 2-way 跟 full way\
     > (直接在 L3 cache implement，可以用 miss rate 判斷是否成功)
 
-+ [ ] Q4. **Modify last level cache policy based on frequency based replacement policy** (15%)
++ [x] Q4. **Modify last level cache policy based on frequency based replacement policy** (15%)
+    > 直接去 `Caches.py` 的 L3Cache overwrite replacement policy
 
 + [ ] Q5. **Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm** (15%)
+    > 應該是修改 `gem5/src/mem/cache/base.cc`
     > 必須跑 benchmark multiply 在 write through 跟 write back\
     > (gem5 default 使用 write back，可以用 write request 的數量判斷 write through 是否成功)
 
@@ -112,3 +115,53 @@
     > Design last level cache policy to reduce the energy consumption of pcm_based main memory
 
     > Baseline:LRU
+
+
+## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Diagram
+```mermaid
+%%{init:{"flowchart":{"defaultRenderer":"elk"}}}%%
+flowchart LR
+  subgraph system
+    subgraph cpu
+      direction TB
+      icache_port
+      dcache_port
+      subgraph l1icache
+        l1i_cpu_side["cpu_side"]
+        l1i_mem_side["mem_side"]
+      end
+      subgraph l1dcache
+        l1d_cpu_side["cpu_side"]
+        l1d_mem_side["mem_side"]
+      end
+    end
+    subgraph l2bus
+      l2bus_slave["slave"]
+      l2bus_master["master"]
+    end
+    subgraph l2cache
+      l2_cpu_side["cpu_side"]
+      l2_mem_side["mem_side"]
+    end
+    subgraph l3bus
+      l3bus_slave["slave"]
+      l3bus_master["master"]
+    end
+    subgraph l3cache
+      l3_cpu_side["cpu_side"]
+      l3_mem_side["mem_side"]
+    end
+    subgraph membus
+      slave_membus["slave"]
+      master_membus["master"]
+    end
+  end
+  icache_port --- l1i_cpu_side
+  dcache_port --- l1d_cpu_side
+  l1i_mem_side --- l2bus_slave
+  l1d_mem_side --- l2bus_slave
+  l2bus_master --- l2_cpu_side
+  l2_mem_side --- l3bus_slave
+  l3bus_master --- l3_cpu_side
+  l3_mem_side --- slave_membus
+```
