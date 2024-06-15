@@ -550,7 +550,7 @@
                         "maxStackSize": 67108864, 
                         "ppid": 0, 
                         "type": "Process", 
-                        "cwd": "/home/rogeliokg-/Gem5-Practice/project/result/Q2", 
+                        "cwd": "/home/rogeliokg-/Gem5-Practice/project/result/Q2/enable_l3", 
                         "pgid": 100, 
                         "simpoint": 0, 
                         "euid": 100, 
@@ -563,7 +563,7 @@
                         "errout": "cerr", 
                         "useArchPT": false, 
                         "egid": 100, 
-                        "output": "/home/rogeliokg-/Gem5-Practice/project/result/Q2/std_output.txt"
+                        "output": "/home/rogeliokg-/Gem5-Practice/project/result/Q2/enable_l3/std_output.txt"
                     }
                 ], 
                 "name": "cpu", 
@@ -762,9 +762,9 @@
             "replacement_policy": {
                 "eventq_index": 0, 
                 "path": "system.l3.replacement_policy", 
-                "type": "LRURP", 
+                "type": "LFURP", 
                 "name": "replacement_policy", 
-                "cxx_class": "LRURP"
+                "cxx_class": "LFURP"
             }, 
             "cpu_side": {
                 "peer": "system.tol3bus.master[0]", 

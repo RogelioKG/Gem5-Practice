@@ -2,9 +2,9 @@ gem5 Simulator System.  http://gem5.org
 gem5 is copyrighted software; use the --copyright option for details.
 
 gem5 compiled Jun 15 2024 01:50:33
-gem5 started Jun 15 2024 03:40:41
-gem5 executing on ubuntu-18, pid 22901
-command line: /home/rogeliokg-/Gem5-Practice/project/gem5/build/X86/gem5.opt /home/rogeliokg-/Gem5-Practice/project/gem5/configs/example/se.py --cmd /home/rogeliokg-/Gem5-Practice/project/gem5/tests/test-progs/hello/bin/x86/linux/hello --cpu-type=TimingSimpleCPU --caches --l2cache --l3cache --l1i_size=32kB --l1d_size=32kB --l2_size=128kB --l3_size=1MB --mem-type=NVMainMemory --nvmain-config=/home/rogeliokg-/Gem5-Practice/project/NVmain/Config/PCM_ISSCC_2012_4GB.config --output=/home/rogeliokg-/Gem5-Practice/project/result/Q2/std_output.txt
+gem5 started Jun 16 2024 01:36:53
+gem5 executing on ubuntu-18, pid 15805
+command line: /home/rogeliokg-/Gem5-Practice/project/gem5/build/X86/gem5.opt /home/rogeliokg-/Gem5-Practice/project/gem5/configs/example/se.py --cmd /home/rogeliokg-/Gem5-Practice/project/gem5/tests/test-progs/hello/bin/x86/linux/hello --cpu-type=TimingSimpleCPU --caches --l2cache --l3cache --l1i_size=32kB --l1d_size=32kB --l2_size=128kB --l3_size=1MB --mem-type=NVMainMemory --nvmain-config=/home/rogeliokg-/Gem5-Practice/project/NVmain/Config/PCM_ISSCC_2012_4GB.config --output=/home/rogeliokg-/Gem5-Practice/project/result/Q2/enable_l3/std_output.txt
 
 Global frequency set at 1000000000000 ticks per second
 NVMainControl: Reading NVMain config file: /home/rogeliokg-/Gem5-Practice/project/NVmain/Config/PCM_ISSCC_2012_4GB.config.
