@@ -98,7 +98,7 @@
 + [x] Q2. **Enable L3 last level cache in GEM5 + NVMAIN** (15%)
     > 看到 log 裡面有 L3 cache 的資訊
 
-+ [ ] Q3. **Config last level cache to 2-way and full-way associative cache and test performance** (15%)
++ [x] Q3. **Config last level cache to 2-way and full-way associative cache and test performance** (15%)
     > 必須跑 benchmark quicksort 在 2-way 跟 full way\
     > (直接在 L3 cache implement，可以用 miss rate 判斷是否成功)
 
