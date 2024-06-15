@@ -102,7 +102,7 @@
     > 必須跑 benchmark quicksort 在 2-way 跟 full way\
     > (直接在 L3 cache implement，可以用 miss rate 判斷是否成功)
 
-+ [ ] Q4. **Modify last level cache policy based on frequency based replacement policy** (15%)
++ [x] Q4. **Modify last level cache policy based on frequency based replacement policy** (15%)
 
 + [ ] Q5. **Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm** (15%)
     > 必須跑 benchmark multiply 在 write through 跟 write back\
