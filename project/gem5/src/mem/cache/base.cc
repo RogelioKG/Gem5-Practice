@@ -916,6 +916,7 @@ BaseCache::access(PacketPtr pkt, CacheBlk *&blk, Cycles &lat,
     }
 
     if (pkt->isEviction()) {
+        DPRINTF(Cache, "RogelioTest: isEviction\n");
         // We check for presence of block in above caches before issuing
         // Writeback or CleanEvict to write buffer. Therefore the only
         // possible cases can be of a CleanEvict packet coming from above
@@ -956,6 +957,7 @@ BaseCache::access(PacketPtr pkt, CacheBlk *&blk, Cycles &lat,
     // Writeback handling is special case.  We can write the block into
     // the cache without having a writeable copy (or any copy at all).
     if (pkt->isWriteback()) {
+        DPRINTF(Cache, "RogelioTest: isWriteback\n");
         assert(blkSize == pkt->getSize());
 
         // we could get a clean writeback while we are having
@@ -1003,6 +1005,7 @@ BaseCache::access(PacketPtr pkt, CacheBlk *&blk, Cycles &lat,
             pkt->payloadDelay;
         return true;
     } else if (pkt->cmd == MemCmd::CleanEvict) {
+        DPRINTF(Cache, "RogelioTest: CleanEvict\n");
         if (blk) {
             // Found the block in the tags, need to stop CleanEvict from
             // propagating further down the hierarchy. Returning true will
@@ -1016,6 +1019,7 @@ BaseCache::access(PacketPtr pkt, CacheBlk *&blk, Cycles &lat,
         // go to next level.
         return false;
     } else if (pkt->cmd == MemCmd::WriteClean) {
+        DPRINTF(Cache, "RogelioTest: WriteClean\n");
         // WriteClean handling is a special case. We can allocate a
         // block directly if it doesn't exist and we can update the
         // block immediately. The WriteClean transfers the ownership
@@ -1065,10 +1069,17 @@ BaseCache::access(PacketPtr pkt, CacheBlk *&blk, Cycles &lat,
         return !pkt->writeThrough();
     } else if (blk && (pkt->needsWritable() ? blk->isWritable() :
                        blk->isReadable())) {
+        DPRINTF(Cache, "RogelioTest: blk\n");
         // OK to satisfy access
         incHitCount(pkt);
         satisfyRequest(pkt, blk);
         maintainClusivity(pkt->fromCache(), blk);
+
+        // RogelioKG: Maybe here...? But why only here?
+        if (blk->isWritable()) {
+            PacketPtr writeclean_pkt = writecleanBlk(blk, pkt->req->getDest(), pkt->id);
+            writebacks.push_back(writeclean_pkt);
+        }
 
         return true;
     }
