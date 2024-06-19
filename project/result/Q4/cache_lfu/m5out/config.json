@@ -541,7 +541,7 @@
                         "pid": 100, 
                         "kvmInSE": false, 
                         "cxx_class": "Process", 
-                        "executable": "/home/rogeliokg-/Gem5-Practice/project/gem5/tests/test-progs/hello/bin/x86/linux/hello", 
+                        "executable": "/home/rogeliokg-/Gem5-Practice/project/benchmark/quicksort.out", 
                         "drivers": [], 
                         "system": "system", 
                         "gid": 100, 
@@ -550,7 +550,7 @@
                         "maxStackSize": 67108864, 
                         "ppid": 0, 
                         "type": "Process", 
-                        "cwd": "/home/rogeliokg-/Gem5-Practice/project/result/Q4/cacheRP", 
+                        "cwd": "/home/rogeliokg-/Gem5-Practice/project/result/Q4/cache_lfu", 
                         "pgid": 100, 
                         "simpoint": 0, 
                         "euid": 100, 
@@ -558,12 +558,12 @@
                         "path": "system.cpu.workload", 
                         "name": "workload", 
                         "cmd": [
-                            "/home/rogeliokg-/Gem5-Practice/project/gem5/tests/test-progs/hello/bin/x86/linux/hello"
+                            "/home/rogeliokg-/Gem5-Practice/project/benchmark/quicksort.out"
                         ], 
                         "errout": "cerr", 
                         "useArchPT": false, 
                         "egid": 100, 
-                        "output": "/home/rogeliokg-/Gem5-Practice/project/result/Q4/cacheRP/std_output.txt"
+                        "output": "/home/rogeliokg-/Gem5-Practice/project/result/Q4/cache_lfu/std_output.txt"
                     }
                 ], 
                 "name": "cpu", 

@@ -1,8 +1,8 @@
 PROJECT_DIR="${HOME}/Gem5-Practice/project"
-WORKING_DIR="${PROJECT_DIR}/result/Q4/cacheRP"
+WORKING_DIR="${PROJECT_DIR}/result/Q4/cache_$1"
 
 OPTIONS="\
- --cmd ${PROJECT_DIR}/gem5/tests/test-progs/hello/bin/x86/linux/hello\
+ --cmd ${PROJECT_DIR}/benchmark/quicksort.out\
  --cpu-type=TimingSimpleCPU\
  --caches --l2cache --l3cache\
  --l1i_size=8kB --l1d_size=8kB --l2_size=32kB --l3_size=256kB\
