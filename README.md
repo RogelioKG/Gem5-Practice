@@ -95,26 +95,34 @@
 
 ## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Grading Criteria
 + [x] Q1. **GEM5 + NVMAIN BUILD-UP** (40%)
+    + **Answer** : 按照 PowerPoint 做 
 
 + [x] Q2. **Enable L3 last level cache in GEM5 + NVMAIN** (15%)
-    > 看到 log 裡面有 L3 cache 的資訊
+    + **Answer** : Modify [these files](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-q2-enable-l3-cache)
+    + **Goal** : 看到 _config.ini_ 裡面有 L3 cache 的資訊
 
 + [x] Q3. **Config last level cache to 2-way and full-way associative cache and test performance** (15%)
-    > 必須跑 benchmark quicksort 在 2-way 跟 full way\
-    > (直接在 L3 cache implement，可以用 miss rate 判斷是否成功)
+    + **Answer** : Option `--l3_assoc`. [Set to 1 indicates full-way associativity](https://old.gem5.org/Coherence-Protocol-Independent_Memory_Components.html) (search "set to 1")
+    + **Goal** : 可用 miss rate 判斷是否成功
+    + **Submit** : the log files for running the _quicksort.out_ using 2-way and full-way.
 
 + [x] Q4. **Modify last level cache policy based on frequency based replacement policy** (15%)
-    > 直接去 `Caches.py` 的 L3Cache overwrite replacement policy
+    + **Answer** : Modify `gem5/configs/common/Caches.py`
+    + **Submit** : the log files for running the _quicksort.out_ or _multiply.out_ using original (LRU) & frequency based.
+    + **Demo** : running the _quicksort.out_
 
-+ [ ] Q5. **Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm** (15%)
-    > 應該是修改 `gem5/src/mem/cache/base.cc`
-    > 必須跑 benchmark multiply 在 write through 跟 write back\
-    > (gem5 default 使用 write back，可以用 write request 的數量判斷 write through 是否成功)
++ [x] Q5. **Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm** (15%)
+    > [!IMPORTANT]
+    > gem5 預設使用 write back，[write through 要自己實做](https://www.mail-archive.com/gem5-users@gem5.org/msg16454.html)
+    + **Answer** : Modify `gem5/src/mem/cache/base.cc` (maybe?)
+    + **Goal** : 可用 write request 的數量判斷 write through 是否成功
+    + **Submit** : the log files for running the _multiply.out_ using write through & write back.
 
 + [ ] **Bonus** (10%)
-    > Design last level cache policy to reduce the energy consumption of pcm_based main memory
-
-    > Baseline:LRU
+    > Design last level cache policy to reduce the energy consumption of pcm_based main memory\
+    + **Answer** : ?
+    + **Goal** : ?
+    + **Submit** : the log files for running the _hello.out_ using baseline (LRU) & modified method.
 
 
 ## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Diagram
