@@ -1,11 +1,26 @@
+ASSOCIATIVITY=$1
+TESTBENCH=$2
 PROJECT_DIR="${HOME}/Gem5-Practice/project"
-WORKING_DIR="${PROJECT_DIR}/result/Q4/cache_$1"
+WORKING_DIR="${PROJECT_DIR}/result/Q3/${ASSOCIATIVITY}/${TESTBENCH}"
+
+case ${ASSOCIATIVITY} in
+  two-way)
+    ASSOC=2
+    ;;
+  full-way)
+    ASSOC=1
+    ;;
+  *)
+    exit 1
+    ;;
+esac
 
 OPTIONS="\
- --cmd ${PROJECT_DIR}/benchmark/quicksort.out\
+ --cmd ${PROJECT_DIR}/benchmark/${TESTBENCH}.out\
  --cpu-type=TimingSimpleCPU\
  --caches --l2cache --l3cache\
  --l1i_size=8kB --l1d_size=8kB --l2_size=32kB --l3_size=256kB\
+ --l3_assoc=${ASSOC}\
  --mem-type=NVMainMemory\
  --nvmain-config=${PROJECT_DIR}/NVmain/Config/PCM_ISSCC_2012_4GB.config\
  --output=${WORKING_DIR}/std_output.txt\

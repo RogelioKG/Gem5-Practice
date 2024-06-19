@@ -340,7 +340,7 @@
                     "write_buffers": 8, 
                     "response_latency": 2, 
                     "cxx_class": "Cache", 
-                    "size": 32768, 
+                    "size": 8192, 
                     "type": "Cache", 
                     "clk_domain": "system.cpu_clk_domain", 
                     "max_miss_count": 0, 
@@ -355,7 +355,7 @@
                     "writeback_clean": true, 
                     "p_state_clk_gate_min": 1000, 
                     "tags": {
-                        "size": 32768, 
+                        "size": 8192, 
                         "tag_latency": 2, 
                         "replacement_policy": "system.cpu.icache.replacement_policy", 
                         "name": "tags", 
@@ -541,7 +541,7 @@
                         "pid": 100, 
                         "kvmInSE": false, 
                         "cxx_class": "Process", 
-                        "executable": "/home/rogeliokg-/Gem5-Practice/project/gem5/tests/test-progs/hello/bin/x86/linux/hello", 
+                        "executable": "/home/rogeliokg-/Gem5-Practice/project/benchmark/multiply.out", 
                         "drivers": [], 
                         "system": "system", 
                         "gid": 100, 
@@ -550,7 +550,7 @@
                         "maxStackSize": 67108864, 
                         "ppid": 0, 
                         "type": "Process", 
-                        "cwd": "/home/rogeliokg-/Gem5-Practice/project/result/Q2/enable_l3", 
+                        "cwd": "/home/rogeliokg-/Gem5-Practice/project/result/Q5/write-back/multiply", 
                         "pgid": 100, 
                         "simpoint": 0, 
                         "euid": 100, 
@@ -558,12 +558,12 @@
                         "path": "system.cpu.workload", 
                         "name": "workload", 
                         "cmd": [
-                            "/home/rogeliokg-/Gem5-Practice/project/gem5/tests/test-progs/hello/bin/x86/linux/hello"
+                            "/home/rogeliokg-/Gem5-Practice/project/benchmark/multiply.out"
                         ], 
                         "errout": "cerr", 
                         "useArchPT": false, 
                         "egid": 100, 
-                        "output": "/home/rogeliokg-/Gem5-Practice/project/result/Q2/enable_l3/std_output.txt"
+                        "output": "/home/rogeliokg-/Gem5-Practice/project/result/Q5/write-back/multiply/std_output.txt"
                     }
                 ], 
                 "name": "cpu", 
@@ -617,7 +617,7 @@
                     "write_buffers": 8, 
                     "response_latency": 2, 
                     "cxx_class": "Cache", 
-                    "size": 32768, 
+                    "size": 8192, 
                     "type": "Cache", 
                     "clk_domain": "system.cpu_clk_domain", 
                     "max_miss_count": 0, 
@@ -632,7 +632,7 @@
                     "writeback_clean": false, 
                     "p_state_clk_gate_min": 1000, 
                     "tags": {
-                        "size": 32768, 
+                        "size": 8192, 
                         "tag_latency": 2, 
                         "replacement_policy": "system.cpu.dcache.replacement_policy", 
                         "name": "tags", 
@@ -706,7 +706,7 @@
             "write_buffers": 8, 
             "response_latency": 20, 
             "cxx_class": "Cache", 
-            "size": 131072, 
+            "size": 32768, 
             "type": "Cache", 
             "clk_domain": "system.cpu_clk_domain", 
             "max_miss_count": 0, 
@@ -721,7 +721,7 @@
             "writeback_clean": false, 
             "p_state_clk_gate_min": 1000, 
             "tags": {
-                "size": 131072, 
+                "size": 32768, 
                 "tag_latency": 20, 
                 "replacement_policy": "system.l2.replacement_policy", 
                 "name": "tags", 
@@ -762,9 +762,9 @@
             "replacement_policy": {
                 "eventq_index": 0, 
                 "path": "system.l3.replacement_policy", 
-                "type": "LRURP", 
+                "type": "LFURP", 
                 "name": "replacement_policy", 
-                "cxx_class": "LRURP"
+                "cxx_class": "LFURP"
             }, 
             "cpu_side": {
                 "peer": "system.tol3bus.master[0]", 
@@ -776,7 +776,7 @@
             "write_buffers": 8, 
             "response_latency": 20, 
             "cxx_class": "Cache", 
-            "size": 1048576, 
+            "size": 262144, 
             "type": "Cache", 
             "clk_domain": "system.cpu_clk_domain", 
             "max_miss_count": 0, 
@@ -791,7 +791,7 @@
             "writeback_clean": false, 
             "p_state_clk_gate_min": 1000, 
             "tags": {
-                "size": 1048576, 
+                "size": 262144, 
                 "tag_latency": 20, 
                 "replacement_policy": "system.l3.replacement_policy", 
                 "name": "tags", 

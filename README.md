@@ -2,15 +2,21 @@
 
 112-02 CE3001 : Computer Organization Final Project
 
+> [!NOTE]
+> 模擬結果放在 `project/result` 目錄
 
-## [▶️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Outline
-+ [**Setting up the Project**](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-setting-up-the-project)
-+ [**Q2. Enable L3 cache**](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-q2-enable-l3-cache)
-+ [**Grading Criteria**](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-grading-criteria)
-+ [**Diagram**](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-diagram)
+> [!NOTE]
+> 詳細 commit 在 `dev` 分支
+
+## [▶️][0] Outline
++ [**Setting up the Project**][1]
++ [**Q2. Enable L3 cache**][2]
++ [**Grading Criteria**][3]
++ [**Common Options**][4]
++ [**Diagram**][5]
 
 
-## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Setting up the Project
+## [⬆️][0] Setting up the Project
 
 1. **Environment**
     > Ubuntu 18.04 LTS
@@ -21,7 +27,7 @@
     ```
 
 3. **Install gem5**
-    > [download gem5](https://gem5.googlesource.com/public/gem5/+archive/525ce650e1a5bbe71c39d4b15598d6c003cc9f9e.tar.gz)
+    > [download gem5][gem5-file]
 
 4. **Unzip and compile gem5**
     > [!CAUTION]
@@ -73,7 +79,7 @@
     ```
 
 
-## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Q2. Enable L3 cache
+## [⬆️][0] Q2. Enable L3 cache
 
 + 修改檔案
   + [x] `gem5/configs/common/Options.py`
@@ -93,31 +99,73 @@
   > 細節 code 的部分，同學可以上網找資源關鍵字 Gem5 L3 cache 之類的。
 
 
-## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Grading Criteria
+## [⬆️][0] Grading Criteria
+
 + [x] Q1. **GEM5 + NVMAIN BUILD-UP** (40%)
+    + **Answer** : 按照 PowerPoint 做 
 
 + [x] Q2. **Enable L3 last level cache in GEM5 + NVMAIN** (15%)
-    > 看到 log 裡面有 L3 cache 的資訊
+    + **Answer** : Modify [these files][2]
+    + **Goal** : 看到 _config.ini_ 裡面有 L3 cache 的資訊
 
 + [x] Q3. **Config last level cache to 2-way and full-way associative cache and test performance** (15%)
-    > 必須跑 benchmark quicksort 在 2-way 跟 full way\
-    > (直接在 L3 cache implement，可以用 miss rate 判斷是否成功)
+    + **Answer** : Option `--l3_assoc`. [Set to 1 indicates full-way associativity][full-assoc] (search "set to 1")
+    + **Goal** : 可用 miss rate 判斷是否成功
+    + **Submit** : the log files for running the _quicksort.out_ using 2-way and full-way.
 
 + [x] Q4. **Modify last level cache policy based on frequency based replacement policy** (15%)
-    > 直接去 `Caches.py` 的 L3Cache overwrite replacement policy
+    + **Answer** : Modify `gem5/configs/common/Caches.py`
+    + **Submit** : the log files for running the _quicksort.out_ or _multiply.out_ using original (LRU) & frequency based (LFU).
+    + **Demo** : running the _quicksort.out_
 
-+ [ ] Q5. **Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm** (15%)
-    > 應該是修改 `gem5/src/mem/cache/base.cc`
-    > 必須跑 benchmark multiply 在 write through 跟 write back\
-    > (gem5 default 使用 write back，可以用 write request 的數量判斷 write through 是否成功)
++ [x] Q5. **Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm** (15%)
+    > [!IMPORTANT]
+    > gem5 預設使用 write back，[write through 要自己實作][write-through-email]
+    + **Answer** : Modify `gem5/src/mem/cache/base.cc` (maybe?)
+    + **Goal** : 可用 write request 的數量判斷 write through 是否成功
+    + **Submit** : the log files for running the _multiply.out_ using write through & write back.
 
 + [ ] **Bonus** (10%)
     > Design last level cache policy to reduce the energy consumption of pcm_based main memory
+    + **Answer** : ?
+    + **Goal** : ?
+    + **Submit** : the log files for running the _hello.out_ using baseline (LRU) & modified method.
 
-    > Baseline:LRU
 
+## [⬆️][0] Common Options
+```bash
+build/X86/gem5.opt # 可能是某種能執行 Python 的可執行檔
+--help # 幫助
+--debug-help # 有哪些 SimObject 可以開啟 DEBUG
+--debug-flags=FLAG[,FLAG] # 指定哪些 SimObject 要開啟 DEBUG (開啟 DPRINTF 輸出) 
+configs/example/se.py # Python 腳本
+--help # 幫助
+--cpu-type=TimingSimpleCPU # CPU 類型 (TimingSimpleCPU: Base CPI 為 1 的簡單 CPU)
+--sys-clock=SYS_CLOCK # 系統 clock
+--cpu-clock=CPU_CLOCK # CPU clock
+--mem-type=NVMainMemory # 記憶體類型 (NVMainMemory: 使用 NVMain 模擬)
+--caches # 使用 L1 快取
+--l2cache # 使用 L2 快取
+--l3cache # 使用 L3 快取 (自訂)
+--l1d_size='128kB' # L1D 大小
+--l1i_size='128kB' # L1I 大小
+--l2_size='1MB' # L2 大小
+--l3_size='1MB' # L3 大小
+--l1d_assoc=L1D_ASSOC # L1D set
+--l1i_assoc=L1I_ASSOC # L1I set
+--l2_assoc=L2_ASSOC # L2 set
+--l3_assoc=L3_ASSOC # L3 set
+--ruby # ...
+--abs-max-tick=TICKS # 限制模擬跑多少個 tick 就中止 (1 tick 預設 1 ps)
+--maxinsts=MAXINSTS # 限制模擬的 CPU 跑多少個指令就中止
+--options=OPTIONS # 如果 binary file 有 cmd args，在這裡餵給它 (要用雙引號刮起來)
+--nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config # 記憶體配置 (自訂)
+--cmd tests/test-progs/hello/bin/x86/linux/hello # 讓模擬執行指定 binary file
+--output=FILE # 將執行 binary file 產生的標準輸出導向某檔案
+--errout=ERROUT # 將執行 binary file 產生的標準錯誤導向某檔案
+```
 
-## [⬆️](https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline) Diagram
+## [⬆️][0] Diagram
 ```mermaid
 %%{init:{"flowchart":{"defaultRenderer":"elk"}}}%%
 flowchart LR
@@ -165,3 +213,13 @@ flowchart LR
   l3bus_master --- l3_cpu_side
   l3_mem_side --- slave_membus
 ```
+
+[0]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline
+[1]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-setting-up-the-project
+[2]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-q2-enable-l3-cache
+[3]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-grading-criteria
+[4]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-common-options
+[5]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-diagram
+[gem5-file]: https://gem5.googlesource.com/public/gem5/+archive/525ce650e1a5bbe71c39d4b15598d6c003cc9f9e.tar.gz
+[full-assoc]: https://old.gem5.org/Coherence-Protocol-Independent_Memory_Components.html
+[write-through-email]: https://www.mail-archive.com/gem5-users@gem5.org/msg16454.html
