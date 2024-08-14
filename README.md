@@ -2,6 +2,8 @@
 
 112-02 CE3001 : Computer Organization Final Project
 
+
+
 > [!NOTE]
 > 模擬結果放在 `project/result` 目錄
 
@@ -23,44 +25,49 @@
 
 2. **Toolkits**
     ```bash
-    sudo apt install build-essential git m4 scons zlib1g zlib1g-dev libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev python3-dev python3-six python libboost-all-dev pkg-config
+    sudo apt install build-essential git m4 scons zlib1g zlib1g-dev \
+    libprotobuf-dev protobuf-compiler libprotoc-dev libgoogle-perftools-dev \
+    python3-dev python3-six python libboost-all-dev pkg-config
     ```
 
 3. **Install gem5**
     > [download gem5][gem5-file]
 
 4. **Unzip and compile gem5**
-    > [!CAUTION]
-    > 在 gen5 目錄下
+    |🚨 CAUTION : 在 gen5 目錄下|
+    |:---|
 
-    > [!CAUTION]
-    > 編譯之後位置就不能動 (編譯過程有使用到絕對路徑)
+    |🚨 CAUTION : 編譯之後位置就不能動 (編譯過程有使用到絕對路徑)|
+    |:---|
+
     ```bash
     scons build/X86/gem5.opt -j 4
     ```
     + `–j` : multithread 加速 (Optional) (arg: int)
 
-5. **Clone NVmain**
-    > [!CAUTION]
-    > 把 NVmain 跟 gem5 放到同一個目錄下
+6. **Clone NVmain**
+    |🚨 CAUTION : 把 NVmain 跟 gem5 放到同一個目錄下|
+    |:---|
 
-    > [!NOTE]
-    > 或者使用 `git submodule` 也可以
+    |📘 NOTE : 或者使用 `git submodule` 也可以|
+    |:---|
+
     ```bash
     git clone https://github.com/SEAL-UCSB/NVmain
     ```
 
-6. **Comment `NVmain/SConscript`**
+8. **Comment `NVmain/SConscript`**
     > 把 36 行的 `from gem5_scons import Transform` 註解掉並存檔
 
-7. **Compile NVmain**
-    > [!CAUTION]
-    > 在 NVmain 目錄下
+9. **Compile NVmain**
+    |🚨 CAUTION : 在 NVmain 目錄下|
+    |:---|
+
     ```bash
     scons --build-type=fast
     ```
 
-8. **Modify `gem5/configs/common/Options.py`**
+11. **Modify `gem5/configs/common/Options.py`**
     > 第 133 行加入以下程式並存檔
     ```py
     for arg in sys.argv:
@@ -68,12 +75,13 @@
         parser.add_option(arg, type="string", default="NULL", help="Set NVMain configuration value for a parameter")
     ```
 
-9.  **Uncomment `NVmain/SConscript`**
+12.  **Uncomment `NVmain/SConscript`**
     > 還原前面註解掉的 `from gem5_scons import Transform`
 
-10. **Compile Together**
-    > [!CAUTION]
-    > 在 gen5 目錄下
+13. **Compile Together**
+    |🚨 CAUTION : 在 gen5 目錄下|
+    |:---|
+
     ```bash
     scons EXTRAS=../NVmain build/X86/gem5.opt
     ```
@@ -89,15 +97,18 @@
   + [x] `gem5/src/cpu/BaseCPU.py`
 
 + 注意
-  > [!NOTE]
-  > 前面四個檔案只是增加 L3 cache 的 parameter，照著 L2 cache 的設定去做模仿就可以。
+  |📘 NOTE|
+  |:---|
+  |前面四個檔案只是增加 L3 cache 的 parameter，<br>照著 L2 cache 的設定去做模仿就可以。|
 
-  > [!NOTE]
-  > `CacheConfig.py` 需要讓 L3 cache 連接整個 Gem5 系統，這邊要注意 L2 跟 L3 這兩個 cache 的關係，要讓系統在已使用 L2 cache 的情況下才能使用 L3 cache，所以要注意修改的時候有沒有滿足這個條件。
+  |📘 NOTE|
+  |:---|
+  |`CacheConfig.py` 需要讓 L3 cache 連接整個 Gem5 系統，<br>這邊要注意 L2 跟 L3 這兩個 cache 的關係，<br>要讓系統在已使用 L2 cache 的情況下才能使用 L3 cache，<br>所以要注意修改的時候有沒有滿足這個條件。|
 
-  > [!NOTE]
-  > 細節 code 的部分，同學可以上網找資源關鍵字 Gem5 L3 cache 之類的。
-
+  |📘 NOTE|
+  |:---|
+  |細節 code 的部分，<br>同學可以上網找資源關鍵字 Gem5 L3 cache 之類的。|
+  
 
 ## [⬆️][0] Grading Criteria
 
