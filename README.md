@@ -34,57 +34,56 @@
     > [download gem5][gem5-file]
 
 4. **Unzip and compile gem5**
+    > `–j` 選項是 multithread 加速 (Optional) (arg: int)
+    ```bash
+    scons build/X86/gem5.opt -j 4
+    ```
+
     |🚨 CAUTION : 在 gen5 目錄下|
     |:---|
 
     |🚨 CAUTION : 編譯之後位置就不能動 (編譯過程有使用到絕對路徑)|
     |:---|
 
+5. **Clone NVmain**
     ```bash
-    scons build/X86/gem5.opt -j 4
+    git clone https://github.com/SEAL-UCSB/NVmain
     ```
-    + `–j` : multithread 加速 (Optional) (arg: int)
-
-6. **Clone NVmain**
     |🚨 CAUTION : 把 NVmain 跟 gem5 放到同一個目錄下|
     |:---|
 
     |📘 NOTE : 或者使用 `git submodule` 也可以|
     |:---|
 
-    ```bash
-    git clone https://github.com/SEAL-UCSB/NVmain
-    ```
-
-8. **Comment `NVmain/SConscript`**
+6. **Comment `NVmain/SConscript`**
     > 把 36 行的 `from gem5_scons import Transform` 註解掉並存檔
 
-9. **Compile NVmain**
-    |🚨 CAUTION : 在 NVmain 目錄下|
-    |:---|
-
+7. **Compile NVmain**
     ```bash
     scons --build-type=fast
     ```
+    |🚨 CAUTION : 在 NVmain 目錄下|
+    |:---|
 
-11. **Modify `gem5/configs/common/Options.py`**
+8. **Modify `gem5/configs/common/Options.py`**
     > 第 133 行加入以下程式並存檔
+
     ```py
     for arg in sys.argv:
       if arg[:9] == "--nvmain-":
         parser.add_option(arg, type="string", default="NULL", help="Set NVMain configuration value for a parameter")
     ```
 
-12.  **Uncomment `NVmain/SConscript`**
+9. **Uncomment `NVmain/SConscript`**
     > 還原前面註解掉的 `from gem5_scons import Transform`
 
-13. **Compile Together**
-    |🚨 CAUTION : 在 gen5 目錄下|
-    |:---|
 
+10. **Compile Together**
     ```bash
     scons EXTRAS=../NVmain build/X86/gem5.opt
     ```
+    |🚨 CAUTION : 在 gen5 目錄下|
+    |:---|
 
 
 ## [⬆️][0] Q2. Enable L3 cache
@@ -130,8 +129,8 @@
     + **Demo** : running the _quicksort.out_
 
 + [x] Q5. **Test the performance of write back and write through policy based on 4-way associative cache with isscc_pcm** (15%)
-    > [!IMPORTANT]
-    > gem5 預設使用 write back，[write through 要自己實作][write-through-email]
+    |🔮 IMPORTANT : gem5 預設使用 write back，[write through 要自己實作][write-through-email]|
+    |:---|
     + **Answer** : Modify `gem5/src/mem/cache/base.cc` (maybe?)
     + **Goal** : 可用 write request 的數量判斷 write through 是否成功
     + **Submit** : the log files for running the _multiply.out_ using write through & write back.
