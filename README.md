@@ -2,13 +2,22 @@
 
 112-02 CE3001 : Computer Organization Final Project
 
+<!-- link -->
+[0]: #️-outline
+[1]: #️-setting-up-the-project
+[2]: #️-q2-enable-l3-cache
+[3]: #️-grading-criteria
+[4]: #️-common-options
+[5]: #️-diagram
+[gem5-file]: https://gem5.googlesource.com/public/gem5/+archive/525ce650e1a5bbe71c39d4b15598d6c003cc9f9e.tar.gz
+[full-assoc]: https://old.gem5.org/Coherence-Protocol-Independent_Memory_Components.html
+[write-through-email]: https://www.mail-archive.com/gem5-users@gem5.org/msg16454.html
 
 
-> [!NOTE]
-> 模擬結果放在 `project/result` 目錄
-
-> [!NOTE]
-> 詳細 commit 在 `dev` 分支
+|📘 NOTE |
+|:---|
+|模擬結果放在 `project/result` 目錄|
+|詳細 commit 在 `dev` 分支|
 
 ## [▶️][0] Outline
 + [**Setting up the Project**][1]
@@ -21,7 +30,8 @@
 ## [⬆️][0] Setting up the Project
 
 1. **Environment**
-    > Ubuntu 18.04 LTS
+    
+    Ubuntu 18.04 LTS
 
 2. **Toolkits**
     ```bash
@@ -31,32 +41,36 @@
     ```
 
 3. **Install gem5**
-    > [download gem5][gem5-file]
+    
+    [download gem5][gem5-file]
 
 4. **Unzip and compile gem5**
-    > `–j` 選項是 multithread 加速 (Optional) (arg: int)
     ```bash
     scons build/X86/gem5.opt -j 4
     ```
+    > `–j` 選項是 multithread 加速 (Optional) (arg: int)
 
-    |🚨 CAUTION : 在 gen5 目錄下|
+    |🚨 CAUTION |
     |:---|
+    |在 gen5 目錄下|
 
-    |🚨 CAUTION : 編譯之後位置就不能動 (編譯過程有使用到絕對路徑)|
+    |🚨 CAUTION |
     |:---|
+    |編譯之後位置就不能動 (編譯過程有使用到絕對路徑)|
 
 5. **Clone NVmain**
     ```bash
     git clone https://github.com/SEAL-UCSB/NVmain
     ```
-    |🚨 CAUTION : 把 NVmain 跟 gem5 放到同一個目錄下|
-    |:---|
+    > 或者使用 `git submodule` 也可以
 
-    |📘 NOTE : 或者使用 `git submodule` 也可以|
+    |🚨 CAUTION |
     |:---|
+    |把 NVmain 跟 gem5 放到同一個目錄下|
 
 6. **Comment `NVmain/SConscript`**
-    > 把 36 行的 `from gem5_scons import Transform` 註解掉並存檔
+    
+    把 36 行的 `from gem5_scons import Transform` 註解掉並存檔
 
 7. **Compile NVmain**
     ```bash
@@ -66,7 +80,8 @@
     |:---|
 
 8. **Modify `gem5/configs/common/Options.py`**
-    > 第 133 行加入以下程式並存檔
+    
+    第 133 行加入以下程式並存檔
 
     ```py
     for arg in sys.argv:
@@ -75,8 +90,8 @@
     ```
 
 9. **Uncomment `NVmain/SConscript`**
-    > 還原前面註解掉的 `from gem5_scons import Transform`
-
+    
+    還原前面註解掉的 `from gem5_scons import Transform`
 
 10. **Compile Together**
     ```bash
@@ -223,13 +238,3 @@ flowchart LR
   l3bus_master --- l3_cpu_side
   l3_mem_side --- slave_membus
 ```
-
-[0]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-outline
-[1]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-setting-up-the-project
-[2]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-q2-enable-l3-cache
-[3]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-grading-criteria
-[4]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-common-options
-[5]: https://github.com/RogelioKG/Gem5-Practice?tab=readme-ov-file#%EF%B8%8F-diagram
-[gem5-file]: https://gem5.googlesource.com/public/gem5/+archive/525ce650e1a5bbe71c39d4b15598d6c003cc9f9e.tar.gz
-[full-assoc]: https://old.gem5.org/Coherence-Protocol-Independent_Memory_Components.html
-[write-through-email]: https://www.mail-archive.com/gem5-users@gem5.org/msg16454.html
